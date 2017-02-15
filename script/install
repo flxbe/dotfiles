@@ -6,6 +6,9 @@ set -e
 
 cd "$(dirname $0)"/..
 
+# install homebrew first
+./homebrew/install.sh
+
 # Run Homebrew through the Brewfile
 echo "› brew bundle"
 brew bundle
