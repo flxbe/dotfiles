@@ -1,3 +1,19 @@
+" unmap arrow keys in normal mode
+no <left> <Nop>
+no <down> <Nop>
+no <up> <Nop>
+no <right> <Nop>  
+" in insert mode
+ino <left> <Nop>
+ino <down> <Nop>
+ino <up> <Nop>
+ino <right> <Nop>  
+" in visual mode
+vno <left> <Nop>
+vno <down> <Nop>
+vno <up> <Nop>
+vno <right> <Nop>  
+
 " basic stuff
 set number		"activate line numbers
 set autoindent		"intend new lines

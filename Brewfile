@@ -3,6 +3,7 @@ tap 'homebrew/bundle'
 
 brew 'zsh'
 brew 'node'
+brew 'emacs', args: ['with-cocoa']
 
 cask 'firefox'
 cask 'google-chrome'
