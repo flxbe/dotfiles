@@ -3,6 +3,7 @@ tap 'homebrew/bundle'
 
 brew 'zsh'
 brew 'node'
+brew 'ansible'
 
 cask 'firefox'
 cask 'google-chrome'

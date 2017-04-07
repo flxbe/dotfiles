@@ -1,3 +1,24 @@
+" install vim-plug
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs --insecure
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+" install plugins
+let $GIT_SSL_NO_VERIFY = 'true'
+call plug#begin('~/.vim/plugged')
+Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-fugitive'
+Plug 'scrooloose/nerdtree'
+Plug 'altercation/vim-colors-solarized'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
+call plug#end()
+let $GIT_SSL_NO_VERIFY = 'false'
+
 " unmap arrow keys in normal mode
 no <left> <Nop>
 no <down> <Nop>
@@ -25,9 +46,8 @@ set softtabstop=2	"number of spaces per tab
 set cursorline
 set cursorcolumn
 
-" load github plugins
-execute pathogen#infect()
-filetype plugin indent on
+" set relative numbering
+set relativenumber
 
 " set the airline theme
 set laststatus=2
@@ -35,11 +55,10 @@ let g:airline_powerline_fonts = 1
 let g:airline_theme='solarized'
 let g:airline#extensions#tabline#enabled = 1
 
-" highlight syntax
-syntax on
-
 " use solarized color theme
 "let g:solarized_termcolors=256
 set background=dark
 colorscheme solarized
 
+" configure jsx syntax
+let g:jsx_ext_required = 0
