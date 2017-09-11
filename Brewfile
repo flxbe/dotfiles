@@ -11,5 +11,4 @@ cask 'firefox'
 cask 'google-chrome'
 cask 'slack'
 cask 'steam'
-cask 'emacs'
 
