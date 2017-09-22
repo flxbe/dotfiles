@@ -1,13 +1,9 @@
+#!/bin/bash
+
 export DOT=$HOME/./dotfiles
 
-# load all config files
-typeset -U config_files
-config_files=($DOT/**/*.sh)
+# bin directory
+export PATH="$DOT/bin:$PATH"
 
-# load the path files
-for file in ${(M)config_files:#*/path.sh}
-do
-  source $file
-done
-
-unset config_files
+# cargo for rust
+export PATH="$HOME/.cargo/bin:$PATH"
