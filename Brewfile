@@ -1,10 +1,9 @@
 cask_args appdir: '/Applications'
 tap 'homebrew/bundle'
-tap 'neovim/neovim'
 
 brew 'node'
 brew 'ansible'
-brew 'neovim/neovim/neovim'
+brew 'neovim'
 
 cask 'firefox'
 cask 'steam'
