@@ -4,6 +4,8 @@
 
 cd "$(dirname "$0")/.."
 DOTFILES_ROOT=$(pwd -P)
+echo "$HOME/.dotfiles"
+echo $DOTFILES_ROOT
 
 set -e
 
@@ -125,6 +127,13 @@ link_file () {
   fi
 }
 
+install_repository () {
+  if [ "$HOME/.dotfiles" != $DOTFILES_ROOT ]
+  then
+    info 'installing repository'
+  fi
+}
+
 install_dotfiles () {
   info 'installing dotfiles'
 
@@ -138,6 +147,7 @@ install_dotfiles () {
 }
 
 setup_gitconfig
+install_repository
 install_dotfiles
 
 echo ''
