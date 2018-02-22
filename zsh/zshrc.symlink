@@ -1,0 +1,29 @@
+# Lines configured by zsh-newuser-install
+HISTFILE=~/.histfile
+HISTSIZE=1000
+SAVEHIST=1000
+bindkey -v
+# End of lines configured by zsh-newuser-install
+
+# The following lines were added by compinstall
+zstyle :compinstall filename '/home/flxbe/.zshrc'
+
+autoload -Uz compinit
+compinit
+# End of lines added by compinstall
+
+# dotfiles directory
+export DOT=$HOME/.dotfiles
+
+# bin directory
+export PATH="$DOT/bin:$PATH"
+
+# cargo for rust
+export PATH="$HOME/.cargo/bin:$PATH"
+
+alias ls="ls --color=auto"
+
+if [[ -o login ]]; then
+  $DOT/tty/tty-solarized-dark.sh
+fi  
+
