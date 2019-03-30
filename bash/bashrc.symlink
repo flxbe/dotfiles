@@ -1,9 +1,13 @@
 #!/bin/bash
 
+# export DOT environment variable
 export DOT=$HOME/./dotfiles
 
-# bin directory
+# add the /DOT/bin folder to the path
 export PATH="$DOT/bin:$PATH"
 
-# cargo for rust
-export PATH="$HOME/.cargo/bin:$PATH"
+# import .bash_local
+if [ -f ~/.bash_local ]; then
+    source ~/.bash_local
+fi
+
