@@ -55,7 +55,7 @@ let g:airline_theme='solarized'
 let g:airline#extensions#tabline#enabled = 1
 
 " use solarized color theme
-"let g:solarized_termcolors=256
+syntax enable
 set background=dark
 colorscheme solarized
 
