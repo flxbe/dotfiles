@@ -1,17 +1,25 @@
 #!/bin/sh
 
-# Disable press-and-hold for keys in favor of key repeat.
+success () {
+  printf "\r\033[2K  [ \033[00;32mOK\033[0m ] $1\n"
+}
+
+success "Disable press-and-hold in favor of key repeat."
 defaults write -g ApplePressAndHoldEnabled -bool false
 
-# Always open everything in Finder's list view. This is important.
+success "Always open Finder in list view."
 defaults write com.apple.Finder FXPreferredViewStyle Nlsv
 
-# Show the ~/Library folder.
+success "Don't hide the ~/Library folder."
 chflags nohidden ~/Library
 
-# Set a really fast key repeat.
+success "Increase key-repeat frequency."
 defaults write NSGlobalDomain KeyRepeat -int 1
 
-# Set the Finder prefs for showing a few different volumes on the Desktop.
+success "Show external hard drives on the desktop."
 defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
+
+success "Show removable media on desktop"
 defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true
+
+success "MacOS successfully initialised."
