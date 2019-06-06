@@ -13,6 +13,9 @@ There's a few special files in the hierarchy.
 ## Installation
 
 ```bash
+cd ~/repositories
+git clone https://github.com/flxbe/dotfiles
+cd dotfiles
 ./script/bootsrap
 ./script/install
 ```
