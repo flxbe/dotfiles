@@ -16,7 +16,7 @@ There's a few special files in the hierarchy.
 cd ~/repositories
 git clone https://github.com/flxbe/dotfiles
 cd dotfiles
-./script/bootsrap
+./script/bootstrap
 ./script/install
 ```
 
