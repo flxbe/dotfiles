@@ -1,0 +1,8 @@
+#!/usr/bin/env zsh
+
+stow -t ~ bin
+stow -t ~ zsh
+stow -t ~ git
+stow -t ~ nvim
+stow -t ~ tmux
+
