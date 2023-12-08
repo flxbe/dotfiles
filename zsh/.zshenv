@@ -1,7 +1,5 @@
 export XDG_CONFIG_HOME=$HOME/.config
-VIM="nvim"
 
 export PATH=$HOME/.local/scripts:$PATH
-
-bindkey -s ^f "tmux-sessionizer\n"
+export PATH=$HOME/zig_nightly:$PATH
 
