@@ -1,10 +1,10 @@
 font:
-    size: 20.0
+    size: 12.0
 
     normal:
-      family: Inconsolata Nerd Font
+      family: Inconsolata Nerd Font Mono
     bold:
-      family: Inconsolata Nerd Font
+      family: Inconsolata Nerd Font Mono
     italic:
-      family: Inconsolata Nerd Font
+      family: Inconsolata Nerd Font Mono
 
