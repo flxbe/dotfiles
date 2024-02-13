@@ -6,4 +6,7 @@ stow -t ~ git
 stow -t ~ nvim
 stow -t ~ tmux
 stow -t ~ alacritty
-
+stow -t ~ compton
+stow -t ~ i3
+stow -t ~ polybar
+stow -t ~ X
