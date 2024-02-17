@@ -1,9 +1,3 @@
-require('mason').setup({
-    ui = {
-        border = 'rounded'
-    }
-})
-
 -- Global mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
 vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
@@ -12,13 +6,6 @@ vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
 vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist)
 
 local lsp = require('lsp-zero').preset({})
-
-lsp.ensure_installed({
-    "pyright",
-    "rust_analyzer",
-    "tsserver",
-    "efm",
-})
 
 lsp.on_attach(function(client, bufnr)
     -- see :help lsp-zero-keybindings
@@ -39,6 +26,24 @@ lsp.on_attach(function(client, bufnr)
 
     nmap('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
 end)
+
+require('mason').setup({
+    ui = {
+        border = 'rounded'
+    }
+})
+require('mason-lspconfig').setup({
+    ensure_installed = {
+        "pyright",
+        "prettierd",
+        "rust_analyzer",
+        "tsserver",
+        "efm",
+    },
+    handlers = {
+        lsp.default_setup,
+    },
+})
 
 -- register global variable `vim` to avoid warnings when editing the lua files
 require('lspconfig').lua_ls.setup(lsp.nvim_lua_ls())
