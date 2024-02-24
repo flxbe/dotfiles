@@ -1,24 +1,13 @@
-require('mason').setup({
-    ui = {
-        border = 'rounded'
-    }
-})
-
 -- Global mappings.
+
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
-vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
-vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist)
+-- Diagnostic keymaps
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
+vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
+vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
 local lsp = require('lsp-zero').preset({})
-
-lsp.ensure_installed({
-    "pyright",
-    "rust_analyzer",
-    "tsserver",
-    "efm",
-})
 
 lsp.on_attach(function(client, bufnr)
     -- see :help lsp-zero-keybindings
@@ -38,7 +27,29 @@ lsp.on_attach(function(client, bufnr)
     nmap('<leader>f', vim.lsp.buf.format, '[F]ormat')
 
     nmap('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
+    nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
+    nmap('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
+    nmap('<leader>D', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
+    nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
+    nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
 end)
+
+require('mason').setup({
+    ui = {
+        border = 'rounded'
+    }
+})
+require('mason-lspconfig').setup({
+    ensure_installed = {
+        "pyright",
+        "rust_analyzer",
+        "tsserver",
+        "efm",
+    },
+    handlers = {
+        lsp.default_setup,
+    },
+})
 
 -- register global variable `vim` to avoid warnings when editing the lua files
 require('lspconfig').lua_ls.setup(lsp.nvim_lua_ls())

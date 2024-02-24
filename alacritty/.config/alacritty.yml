@@ -12,3 +12,4 @@ font:
       family: Inconsolata Nerd Font Mono
 key_bindings:
   - { key: Space,  mods: Control, mode: ~Search,    action: ToggleViMode            }
+
