@@ -2,7 +2,7 @@
 [hub]
         protocol = ssh
 [core]
-        editor = vim
+	editor = nvim
 [help]
         autocorrect = 1
 [push]
