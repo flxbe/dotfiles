@@ -23,3 +23,9 @@ vim.o.ignorecase = true
 vim.o.smartcase = true
 
 -- vim.opt.colorcolumn = '80'
+
+vim.filetype.add({
+    extension = {
+        jinja = "html"
+    }
+})

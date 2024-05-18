@@ -66,7 +66,7 @@ local prettier = {
 require("lspconfig").efm.setup({
     timeout = 5000,
     init_options = { documentFormatting = true },
-    filetypes = { "typescript", "css", "html", "javascript", "python", "json", "handlebars" },
+    filetypes = { "typescript", "css", "html", "javascript", "python", "json", "handlebars", "htmldjango" },
     settings = {
         languages = {
             typescript = { prettier },
@@ -75,9 +75,10 @@ require("lspconfig").efm.setup({
             css = { prettier },
             json = { prettier },
             handlebars = { prettier },
+            htmldjango = { prettier },
             python = {
                 {
-                    formatCommand = "black --fast --no-color -q -",
+                    formatCommand = "ruff format --no-color -q -",
                     formatStdin = true,
                     rootMarkers = {
                         'pyproject.toml',
