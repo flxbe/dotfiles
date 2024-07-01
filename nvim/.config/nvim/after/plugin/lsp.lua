@@ -8,6 +8,7 @@ vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open float
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
 
+-- TODO: Is this plugin still necessary?
 local lsp = require('lsp-zero').preset({})
 
 lsp.on_attach(function(client, bufnr)
@@ -35,6 +36,8 @@ lsp.on_attach(function(client, bufnr)
     nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
 end)
 
+-- TODO: Dump this in favor of using the globally available installation of each LSP (which opens up the possibility to
+-- use a local installation e.g. in python virtual-envs).
 require('mason').setup({
     ui = {
         border = 'rounded'
@@ -43,6 +46,7 @@ require('mason').setup({
 require('mason-lspconfig').setup({
     ensure_installed = {
         "pyright",
+        "ruff",
         "rust_analyzer",
         "tsserver",
         "efm",
@@ -69,11 +73,34 @@ require('lspconfig').gopls.setup({
     filetypes = { "go", "gomod", "gowork", "gohtml", "gotmpl", "go.html", "go.tmpl" },
 })
 
+require('lspconfig').ruff.setup({
+    on_attach = function(client, bufnr)
+        if client.name == 'ruff' then
+            -- Disable hover in favor of Pyright
+            client.server_capabilities.hoverProvider = false
+        end
+    end
+})
+
+require('lspconfig').pyright.setup {
+    settings = {
+        pyright = {
+            -- Using Ruff's import organizer
+            disableOrganizeImports = true,
+        },
+        python = {
+            analysis = {
+                -- Ignore all files for analysis to exclusively use Ruff for linting
+                ignore = { '*' },
+            },
+        },
+    },
+}
 
 require("lspconfig").efm.setup({
     timeout = 5000,
     init_options = { documentFormatting = true },
-    filetypes = { "typescript", "css", "html", "javascript", "python", "json", "handlebars", "htmldjango" },
+    filetypes = { "typescript", "css", "html", "javascript", "json", "handlebars", "htmldjango" },
     settings = {
         languages = {
             typescript = { prettier },
@@ -83,16 +110,6 @@ require("lspconfig").efm.setup({
             json = { prettier },
             handlebars = { prettier },
             htmldjango = { prettier },
-            python = {
-                {
-                    formatCommand = "ruff format --no-color -q -",
-                    formatStdin = true,
-                    rootMarkers = {
-                        'pyproject.toml',
-                    }
-                }
-            }
-
         }
     }
 })
