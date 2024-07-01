@@ -7,6 +7,7 @@ vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnos
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
+
 local lsp = require('lsp-zero').preset({})
 
 lsp.on_attach(function(client, bufnr)
@@ -45,6 +46,7 @@ require('mason-lspconfig').setup({
         "rust_analyzer",
         "tsserver",
         "efm",
+        "gopls",
     },
     handlers = {
         lsp.default_setup,
@@ -62,6 +64,11 @@ local prettier = {
         'package.json',
     }
 }
+
+require('lspconfig').gopls.setup({
+    filetypes = { "go", "gomod", "gowork", "gohtml", "gotmpl", "go.html", "go.tmpl" },
+})
+
 
 require("lspconfig").efm.setup({
     timeout = 5000,

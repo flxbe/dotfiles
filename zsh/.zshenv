@@ -4,6 +4,7 @@ export PATH=$HOME/.local/scripts:$PATH
 export PATH=$HOME/zig_nightly:$PATH
 
 export PATH=$HOME/.cargo/bin:$PATH
+export PATH=$HOME/go/bin:$PATH
 
 # For rootless docker, only on linux
 if [[ $(uname) != "Darwin" ]]; then

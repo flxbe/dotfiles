@@ -26,6 +26,6 @@ vim.o.smartcase = true
 
 vim.filetype.add({
     extension = {
-        jinja = "html"
+        jinja = "html",
     }
 })
