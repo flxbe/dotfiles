@@ -1,5 +1,6 @@
 require('lazy').setup({
-    { 'folke/tokyonight.nvim' },
+    -- { 'folke/tokyonight.nvim' },
+    { 'shaunsingh/nord.nvim' },
 
     {
         -- Highlight, edit, and navigate code
@@ -63,7 +64,15 @@ require('lazy').setup({
     },
 
     -- Useful plugin to show you pending keybinds.
-    { 'folke/which-key.nvim', opts = {} },
+    {
+        'folke/which-key.nvim',
+        event = "VeryLazy",
+        init = function()
+            vim.o.timeout = true
+            vim.o.timeoutlen = 300
+        end,
+        opts = {}
+    },
     {
         -- Adds git related signs to the gutter, as well as utilities for managing changes
         'lewis6991/gitsigns.nvim',
