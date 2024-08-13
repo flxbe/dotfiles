@@ -6,6 +6,8 @@ export PATH=$HOME/zig_nightly:$PATH
 export PATH=$HOME/.cargo/bin:$PATH
 export PATH=$HOME/go/bin:$PATH
 
+export PATH="$PATH:/opt/nvim-linux64/bin"
+
 # For rootless docker, only on linux
 if [[ $(uname) != "Darwin" ]]; then
     export PATH=/home/flxbe/bin:$PATH
