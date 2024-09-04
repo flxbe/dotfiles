@@ -50,7 +50,7 @@ require('mason-lspconfig').setup({
         "rust_analyzer",
         "tsserver",
         "efm",
-        "gopls",
+        -- "gopls",
     },
     handlers = {
         lsp.default_setup,
