@@ -14,6 +14,12 @@ if [[ $(uname) != "Darwin" ]]; then
     export DOCKER_HOST=unix:///run/user/1000/docker.sock
 fi
 
+if [[ $(uname) == "Darwin" ]]; then
+    echo 'PATH="/usr/local/bin:$PATH"' >> ~/.bash_profile
+    eval $(/opt/homebrew/bin/brew shellenv)
+fi
+
 # To not start ryuk container when using python testcontainers
 export TESTCONTAINERS_RYUK_DISABLED=true
 
+. "$HOME/.cargo/env"
