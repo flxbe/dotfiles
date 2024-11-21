@@ -10,6 +10,7 @@
 ### Other Setup
 
 ```zsh
-
 git clone git@github.com:tmux-plugins/tpm.git ~/repositories/tmux-plugins/tpm
 ```
+
+Then install the tmux plugins with `prefix` + `I`.
