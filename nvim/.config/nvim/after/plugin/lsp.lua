@@ -45,10 +45,11 @@ require('mason').setup({
 })
 require('mason-lspconfig').setup({
     ensure_installed = {
+        "lua_ls",
         "pyright",
         "ruff",
         "rust_analyzer",
-        "tsserver",
+        "ts_ls",
         "efm",
         -- "gopls",
     },
