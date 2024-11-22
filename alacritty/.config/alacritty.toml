@@ -65,6 +65,8 @@ family = "Inconsolata Nerd Font"
 [font.normal]
 family = "Inconsolata Nerd Font"
 
+[keyboard]
+
 [[keyboard.bindings]]
 action = "ToggleViMode"
 key = "Space"
@@ -74,3 +76,4 @@ mods = "Control"
 [window]
 opacity = 1.0
 startup_mode = "Fullscreen"
+
