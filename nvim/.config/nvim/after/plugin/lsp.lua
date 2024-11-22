@@ -48,7 +48,7 @@ require('mason-lspconfig').setup({
         "pyright",
         "ruff",
         "rust_analyzer",
-        "tsserver",
+        "ts_ls",
         "efm",
         -- "gopls",
     },
@@ -59,15 +59,6 @@ require('mason-lspconfig').setup({
 
 -- register global variable `vim` to avoid warnings when editing the lua files
 require('lspconfig').lua_ls.setup(lsp.nvim_lua_ls())
-
-local prettier = {
-    formatCanRange = true,
-    formatCommand = "./node_modules/.bin/prettier --stdin-filepath ${INPUT}",
-    formatStdin = true,
-    rootMarkers = {
-        'package.json',
-    }
-}
 
 require('lspconfig').gopls.setup({
     filetypes = { "go", "gomod", "gowork", "gohtml", "gotmpl", "go.html", "go.tmpl" },
@@ -89,6 +80,15 @@ require('lspconfig').pyright.setup {
             disableOrganizeImports = true,
         },
     },
+}
+
+local prettier = {
+    formatCanRange = true,
+    formatCommand = "./node_modules/.bin/prettier --stdin-filepath ${INPUT}",
+    formatStdin = true,
+    rootMarkers = {
+        'package.json',
+    }
 }
 
 require("lspconfig").efm.setup({

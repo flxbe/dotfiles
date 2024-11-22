@@ -1,7 +1,7 @@
 export XDG_CONFIG_HOME=$HOME/.config
 
 export PATH=$HOME/.local/scripts:$PATH
-export PATH=$HOME/zig_nightly:$PATH
+export PATH=$HOME/zig:$PATH
 
 export PATH=$HOME/.cargo/bin:$PATH
 export PATH=$HOME/go/bin:$PATH
@@ -17,3 +17,4 @@ fi
 # To not start ryuk container when using python testcontainers
 export TESTCONTAINERS_RYUK_DISABLED=true
 
+. "$HOME/.cargo/env"
