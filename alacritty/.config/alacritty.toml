@@ -73,6 +73,6 @@ family = "Inconsolata Nerd Font Mono"
 
 [window]
 opacity = 1.0
-startup_mode = "Fullscreen"
+decorations = "None"
 
 [keyboard]
