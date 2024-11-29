@@ -57,13 +57,13 @@ text = "#2e3440"
 size = 14.0
 
 [font.bold]
-family = "Inconsolata Nerd Font Bold"
+family = "Inconsolata Nerd Font Mono"
 
 [font.italic]
-family = "Inconsolata Nerd Font"
+family = "Inconsolata Nerd Font Mono"
 
 [font.normal]
-family = "Inconsolata Nerd Font"
+family = "Inconsolata Nerd Font Mono"
 
 [keyboard]
 
