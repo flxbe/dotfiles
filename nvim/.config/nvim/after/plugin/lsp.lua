@@ -84,13 +84,9 @@ require('lspconfig').pyright.setup {
 }
 
 require('lspconfig').biome.setup({
-    settings = {
-        ['rust-analyzer'] = {
-            checkOnSave = {
-                command = 'clippy',
-            },
-        },
-    },
+    on_new_config = function(new_config, new_root_dir)
+        new_config.cmd = { new_root_dir .. "/node_modules/.bin/biome", "lsp-proxy" }
+    end,
 })
 
 local prettier = {
@@ -108,11 +104,8 @@ require("lspconfig").efm.setup({
     filetypes = { "css", "html", "handlebars", "htmldjango" },
     settings = {
         languages = {
-            typescript = { prettier },
-            javascript = { prettier },
             html = { prettier },
             css = { prettier },
-            json = { prettier },
             handlebars = { prettier },
             htmldjango = { prettier },
         }
