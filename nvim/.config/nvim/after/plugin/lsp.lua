@@ -83,6 +83,16 @@ require('lspconfig').pyright.setup {
     },
 }
 
+require('lspconfig').biome.setup({
+    settings = {
+        ['rust-analyzer'] = {
+            checkOnSave = {
+                command = 'clippy',
+            },
+        },
+    },
+})
+
 local prettier = {
     formatCanRange = true,
     formatCommand = "./node_modules/.bin/prettier --stdin-filepath ${INPUT}",
@@ -95,7 +105,7 @@ local prettier = {
 require("lspconfig").efm.setup({
     timeout = 5000,
     init_options = { documentFormatting = true },
-    filetypes = { "typescript", "css", "html", "javascript", "json", "handlebars", "htmldjango" },
+    filetypes = { "css", "html", "handlebars", "htmldjango" },
     settings = {
         languages = {
             typescript = { prettier },
