@@ -69,7 +69,7 @@ family = "Inconsolata Nerd Font Mono"
 
 [[keyboard.bindings]]
 action = "ToggleViMode"
-key = "Space"
+key = "s"
 mode = "~Search"
 mods = "Control"
 

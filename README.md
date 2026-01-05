@@ -7,6 +7,10 @@
 5. Install rust
 6. Install fzf
 
+## Local zsh config
+
+Create a `~/.zshrc_local` file for any local overrides.
+
 ### Other Setup
 
 ```zsh

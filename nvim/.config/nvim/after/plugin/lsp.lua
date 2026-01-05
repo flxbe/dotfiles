@@ -8,33 +8,29 @@ vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open float
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
 
--- TODO: Is this plugin still necessary?
-local lsp = require('lsp-zero').preset({})
+vim.api.nvim_create_autocmd('LspAttach', {
+    callback = function(args)
+        local nmap = function(keys, func, desc)
+            if desc then
+                desc = 'LSP: ' .. desc
+            end
 
-lsp.on_attach(function(client, bufnr)
-    -- see :help lsp-zero-keybindings
-    -- to learn the available actions
-    lsp.default_keymaps({ buffer = bufnr })
-
-    local nmap = function(keys, func, desc)
-        if desc then
-            desc = 'LSP: ' .. desc
+            vim.keymap.set('n', keys, func, { buffer = args.buf, desc = desc })
         end
 
-        vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
-    end
+        nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
+        nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
+        nmap('<leader>f', vim.lsp.buf.format, '[F]ormat')
 
-    nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
-    nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
-    nmap('<leader>f', vim.lsp.buf.format, '[F]ormat')
+        nmap('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
+        nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
+        nmap('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
+        nmap('<leader>D', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
+        nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
+        nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
+    end,
+})
 
-    nmap('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
-    nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
-    nmap('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
-    nmap('<leader>D', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
-    nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
-    nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
-end)
 
 -- TODO: Dump this in favor of using the globally available installation of each LSP (which opens up the possibility to
 -- use a local installation e.g. in python virtual-envs).
@@ -51,21 +47,13 @@ require('mason-lspconfig').setup({
         "rust_analyzer",
         "ts_ls",
         "efm",
-        -- "gopls",
-    },
-    handlers = {
-        lsp.default_setup,
     },
 })
 
 -- register global variable `vim` to avoid warnings when editing the lua files
-require('lspconfig').lua_ls.setup(lsp.nvim_lua_ls())
+vim.lsp.enable("luals")
 
-require('lspconfig').gopls.setup({
-    filetypes = { "go", "gomod", "gowork", "gohtml", "gotmpl", "go.html", "go.tmpl" },
-})
-
-require('lspconfig').ruff.setup({
+vim.lsp.config("ruff", {
     on_attach = function(client, bufnr)
         if client.name == 'ruff' then
             -- Disable hover in favor of Pyright
@@ -73,21 +61,34 @@ require('lspconfig').ruff.setup({
         end
     end
 })
+vim.lsp.enable("ruff")
+vim.lsp.enable("rust_analyzer")
 
-require('lspconfig').pyright.setup {
+vim.lsp.config("pyright", {
     settings = {
         pyright = {
             -- Using Ruff's import organizer
             disableOrganizeImports = true,
         },
     },
-}
+})
+vim.lsp.enable("pyright")
 
-require('lspconfig').biome.setup({
+vim.lsp.config("biome", {
     on_new_config = function(new_config, new_root_dir)
         new_config.cmd = { new_root_dir .. "/node_modules/.bin/biome", "lsp-proxy" }
     end,
 })
+vim.lsp.enable("biome")
+
+-- Disable formatting for ts_ls
+vim.lsp.config("ts_ls", {
+    on_attach = function(client)
+        client.server_capabilities.documentFormattingProvider = false
+        client.server_capabilities.documentRangeFormattingProvider = false
+    end
+})
+vim.lsp.enable("ts_ls")
 
 local prettier = {
     formatCanRange = true,
@@ -98,7 +99,7 @@ local prettier = {
     }
 }
 
-require("lspconfig").efm.setup({
+vim.lsp.config("efm", {
     timeout = 5000,
     init_options = { documentFormatting = true },
     filetypes = { "css", "html", "handlebars", "htmldjango" },
@@ -111,8 +112,8 @@ require("lspconfig").efm.setup({
         }
     }
 })
+vim.lsp.enable("efm")
 
-lsp.setup()
 
 vim.diagnostic.config({
     virtual_text = true
