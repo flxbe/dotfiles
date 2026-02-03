@@ -1,5 +1,4 @@
 require('lazy').setup({
-    { 'github/copilot.vim' },
     -- { 'folke/tokyonight.nvim' },
     { 'shaunsingh/nord.nvim' },
 
