@@ -1,20 +1,17 @@
+## Requirements
+
+- alacritty
+- zsh
+- herdr
+- fzf
+- Inconsolata Nerd Font Mono
+
 ## Setup
 
-1. Install `stow`
-2. Clone repository, execute `./install`
-3. Install `alacritty`
-4. Install `Inconsolata Nerd Font Mono`
-5. Install rust
-6. Install fzf
+```
+./install.sh
+```
 
 ## Local zsh config
 
-Create a `~/.zshrc_local` file for any local overrides.
-
-### Other Setup
-
-```zsh
-git clone git@github.com:tmux-plugins/tpm.git ~/repositories/tmux-plugins/tpm
-```
-
-Then install the tmux plugins with `prefix` + `I`.
+Create a `~/.zshrc_local` file for any local overrides (e.g. path extensions to installed tools and programming languages)
