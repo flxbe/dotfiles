@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+selected=$(find ~/repositories ~/repositories/fitko ~/repositories/billotec -mindepth 1 -maxdepth 1 -type d | fzf)
+if [[ -z $selected ]]; then
+    exit 0
+fi
+
+label=$(basename "$selected" | tr . _)
+
+# filter out the workspace_id, null if the workspace does not exist yet
+workspace_id=$(herdr workspace list | jq --raw-output --arg label "$label" '.result.workspaces | map(select(.label == $label)) | .[0].workspace_id')
+
+if [ $workspace_id = 'null' ]; then
+    herdr workspace create --cwd $selected --label $label --focus
+else
+    herdr workspace focus $workspace_id
+fi
